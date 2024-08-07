@@ -43,12 +43,12 @@ class Database
             return false;
         }
     }
-        // insert("usres",  ['name', 'lastname'], ['amir', 'hosemiliw']);
+    // insert("usres",  ['name', 'lastname'], ['amir', 'hosemiliw']);
 
     public function insert($tableName, $fields, $values)
     {
         try {
-            $stmt = $this->connection->prepare("INSERT INTO" . $tableName . "(" . implode(', ', $fields) . ", created_at) VALUES (:" . implode(', :', $values) . ", now() );");
+            $stmt = $this->connection->prepare("INSERT INTO " . $tableName . "(" . implode(', ', $fields) . ", created_at) VALUES (:" . implode(', :', $values) . ", now() );");
             $stmt->execute(array_combine($fields, $values));
             return true;
         } catch (PDOException $e) {
@@ -59,7 +59,7 @@ class Database
     // update("usres", 2 , ['name', 'lastname'], ['amir', 'hosemiliw']);
     public function update($tableName, $id, $fields, $values)
     {
-        $sql = "UPDATE" . $tableName . "SET";
+        $sql = "UPDATE " . $tableName . "SET";
         foreach (array_combine($fields, $values) as $field => $value) {
             if ($value) {
 
@@ -81,19 +81,31 @@ class Database
         }
     }
     // delete("users", 2)''
-public function delete($tableName, $id){
-$sql = "DELETE FROM ". $tableName . " WHERE id =? ;";
+    public function delete($tableName, $id)
+    {
+        $sql = "DELETE FROM " . $tableName . " WHERE id =? ;";
 
-try {
-    $stmt = $this->connection->prepare($sql);
-    $stmt->execute([$id]);
-    return true;
-} catch (PDOException $e) {
-    echo $e->getMessage();
-    return false;
-}}
+        try {
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute([$id]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
 
-
+    //! for file Create table 
+    public function createTable($sql)
+    {
+        try {
+$this->connection->exec($sql);
+return true;
+        }
+        catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
 
 }
-$test = "";

@@ -15,7 +15,10 @@ define('DB_PASSWORD', '');
 
 // require_once('database/DataBase.php');//? for connection to server 
 // $db = new database\Database(); //? create new class for connection 
-
+// require_once 'database/DataBase.php';//? for create table in database
+// require_once ('database/CreateDB.php');//? for create table in database
+// $db = new database\CreateDB();//? for create table in database
+// $db ->run();//? for create table in database
 //? helpers
 // uri('admin/category/{id}','Category','index','GET');
 // uri('admin/login','login','index','post');
@@ -133,4 +136,3 @@ function dd($var)
     echo "<pre>";
     var_dump($var);
 }
-$test = ";";
